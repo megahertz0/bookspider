@@ -61,23 +61,23 @@ django-1.10.1 python 2.7
 1. sudo apt-get install python-pip
 1. sudo apt-get install python-dev python3-dev libxml2-dev libxslt1-dev zlib1g-dev
 1. sudo apt-get install libffi-dev
-1. pip install scrapy
-1. pip install django
-1. pip install raven
-1. pip install celery
-1. pip install django_assets
+1. sudo pip install scrapy
+1. sudo pip install django
+1. sudo pip install raven
+1. sudo pip install celery
+1. sudo pip install django_assets
 1. sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev  libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
-1. apt-get -y install libz-dev libjpeg-dev libfreetype6-dev python-dev
-1. pip install redis
-1. pip install django-redis
+1. sudo apt-get -y install libz-dev libjpeg-dev libfreetype6-dev python-dev
+1. sudo pip install redis
+1. sudo pip install django-redis
 1. sudo apt-get install libpq-dev
-1. pip install psycopg2
-1. pip install django_pgjson
-1. pip install  django-simple-captcha
-1. pip install PyQuery
+1. sudo pip install psycopg2
+1. sudo pip install django_pgjson
+1. sudo pip install  django-simple-captcha
+1. sudo pip install PyQuery
 1. sudo apt-get install redis-server
-1. pip install redis_cache
-1. pip install redis-simple-cache
+1. sudo pip install redis_cache
+1. sudo pip install redis-simple-cache
 1. python manage.py makemigrations
 1. python manage.py migrate
-
+1. sudo pip install scrapy_djangoitem
