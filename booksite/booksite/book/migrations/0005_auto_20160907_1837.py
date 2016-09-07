@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='book',
             name='last_update',
-            field=models.DateTimeField(auto_now=True, db_index=True, default=1),
+            field=models.DateTimeField(auto_now=True, db_index=True, default=None),
             preserve_default=False,
         ),
     ]
