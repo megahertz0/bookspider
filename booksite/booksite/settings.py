@@ -36,7 +36,7 @@ INSTALLED_APPS = (
     'booksite.book',
     'booksite.usercenter',
     'booksite.background',
-    'booksite.baidusitemap',
+#    'booksite.baidusitemap',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -68,7 +68,7 @@ DATABASES = {
 
 SITE_ID = 1
 
-LANGUAGE_CODE = 'zh-cn'
+LANGUAGE_CODE = 'zh-Hans'
 
 TIME_ZONE = 'Asia/Shanghai'
 
@@ -124,11 +124,11 @@ LOGIN_REDIRECT_URL = '/'
 
 CACHES = {
     'default': {
-        'BACKEND': 'redis_cache.cache.RedisCache',
-        'LOCATION': '127.0.0.1:6379:1',
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
         'KEY_PREFIX': 'booksite',
         'OPTIONS': {
-            'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
             'PASSWORD': '',
         }
     }

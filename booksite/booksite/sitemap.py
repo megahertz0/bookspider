@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from booksite.baidusitemap import BaiduSitemap
+#from booksite.baidusitemap import BaiduSitemap
 from booksite.book.models import Book
 
-class BookSitemaps(BaiduSitemap):
+class BookSitemaps():
     changefreq = 'daily'
     priority = 0.5
 

@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 import hashlib
 import gzip
-import redis
+import django_redis
 from StringIO import StringIO
 import cPickle as pickle
 from django.db import models
@@ -11,8 +11,8 @@ from django.core.urlresolvers import reverse
 from django.core.files.base import ContentFile
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
-from django_pgjson.fields import JsonField
-from pyquery import PyQuery as PQ
+#from django_pgjson.fields import JsonField
+#from pyquery import PyQuery as PQ
 
 
 def front_image_path(instance, filename):
@@ -29,7 +29,7 @@ class Book(models.Model):
     category = models.CharField(max_length=20, blank=True)
     info = models.TextField(blank=True)
     book_number = models.IntegerField(db_index=True, unique=True)
-    last_update = models.DateTimeField(auto_now=True, null=True, blank=True, default=None, db_index=True)
+    last_update = models.DateTimeField(auto_now=True,  blank=True, db_index=True)
     last_page_number = models.IntegerField(default=0, null=True, blank=True)
     create_time = models.DateTimeField(auto_now_add=True, db_index=True)
     is_deleted = models.BooleanField(default=False)
