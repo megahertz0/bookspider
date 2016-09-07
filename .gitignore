@@ -13,3 +13,5 @@ booksite/sroot/
 BookSiteApp
 booksite/bookstore
 BookApp
+db.sqlite3
+
