@@ -81,3 +81,4 @@ django-1.10.1 python 2.7
 1. python manage.py makemigrations
 1. python manage.py migrate
 1. sudo pip install scrapy_djangoitem
+1. sudo pip install cssutils

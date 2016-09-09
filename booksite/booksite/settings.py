@@ -85,7 +85,7 @@ TEMPLATE_DIRS = (
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'booksite/template')],
+        'DIRS': [os.path.join(BASE_DIR, 'booksite/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

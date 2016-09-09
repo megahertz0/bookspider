@@ -1,4 +1,4 @@
-extends "book/base.html"
+{% extends "book/base.html" %}
 | {% load static %}
 
 - block pagetitle
@@ -39,7 +39,7 @@ extends "book/base.html"
 							if user.is_superuser
 								.panel-footer.admin
 									a.btn.btn-danger.btn-xs(target="_blank",href="/admin/book/book/{{book.pk}}/") 编辑信息
-									a.bookfixpic.btn.btn-danger.btn-xs(href="javascript:;",data-url="{% url 'bookfixpic' book.pk %}") 更新图章
+									{# a.bookfixpic.btn.btn-danger.btn-xs(href="javascript:;",data-url="{% url 'bookfixpic' book.pk %}") 更新图章 #}
 				else
 					.hidden-xs.col-xs-12.col-sm-6.col-md-4
 						.panel.panel-info
@@ -133,7 +133,7 @@ extends "book/base.html"
 									if user.is_superuser
 										.panel-footer.admin
 											a.btn.btn-danger.btn-xs(target="_blank",href="/admin/book/book/{{book.pk}}/") 编辑信息
-											a.bookfixpic.btn.btn-danger.btn-xs(href="javascript:;",data-url="{% url 'bookfixpic' book.pk %}") 更新图章
+											{#a.bookfixpic.btn.btn-danger.btn-xs(href="javascript:;",data-url="{% url 'bookfixpic' book.pk %}") 更新图章#}
 						if pagination.has_other_pages
 							.col-md-12.col-xs-12.col-sm-12.text-center
 								.pagination
@@ -143,7 +143,7 @@ extends "book/base.html"
 												a.fui-arrow-left(href="#",data-num="1")
 													span.fui-arrow-left
 											li.btn.btn-sm
-												a.fui-arrow-left(href="#",data-num="{{pagination.previous_page_number}}")
+												a.fui-arrow-left(href="#",data-num="{% if pagination.previous_page_number >= 1 %} {{pagination.previous_page_number}} {% else %} {% endif %}")
 										li.active
 											a(href="javascript:;")!= pagination.number
 										if pagination.has_next
