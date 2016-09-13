@@ -1,5 +1,3 @@
-{% load static %}
-{% load assets %}
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -92,6 +90,9 @@
 		</div>
 	</nav>
 {% endspaceless %}
+{% load static %}
+{% load assets %}
+
 	<div class="container">
 	{% block content %}{% endblock content %}
 		<div class="col-md-12">
@@ -99,37 +100,12 @@
 				<div class="panel panel-default">
 					<div class="panel-heading text-center">友情链接</div>
 					<div class="panel-body text-center">
-						<a href="http://www.86696.cc" target="_blank" class="btn btn-link">斗罗大陆</a>
-						<a href="http://www.xiaoshuomi.com" target="_blank" class="btn btn-link">小说迷</a>
-						<a href="http://www.86696.cc" target="_blank" class="btn btn-link">绝世唐门</a>
-						<a href="http://www.txt100.com" target="_blank" class="btn btn-link">TXT电子书免费下载</a>
-						<a href="http://www.52xiaoshuo.com" target="_blank" class="btn btn-link">52小说网</a>
-						<a href="http://www.23hh.com" target="_blank" class="btn btn-link">无弹窗小说</a>
-						<a href="http://www.xiaoshuomi.com" target="_blank" class="btn btn-link">将夜</a>
-						<a href="http://xiaoshuoku.com" target="_blank" class="btn btn-link">无弹窗小说库</a>
-						<a href="http://www.5055.cc" target="_blank" class="btn btn-link">running man</a>
-						<a href="http://www.dushiwenxue.com" target="_blank" class="btn btn-link">都市文学</a>
-						<a href="http://www.qzread.com" target="_blank" class="btn btn-link">Q猪文学站</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	{% block footerblock %}{% endblock footerblock %}
-	<footer class="bs-docs-footer inv">
-		<div class="container text-center">
-			<p>本网站由<a href="http://twitter.com/ouyanghongyu" target="_blank">@ouyanghongyu</a>设计与制作.</p>
-			<p>更多信息请查看<a href="https://github.com/tkliuxing/bookspider">我的GitHub</a>.</p>
-			<p>本项目源码受 <a href="https://github.com/tkliuxing/bookspider/blob/master/LICENSE" target="_blank">Apache</a> 开源协议保护. 本站收录文章版权归原作者所有.</p>
-			<ul class="bs-docs-footer-links muted">
-				<li>当前版本： v1.0</li>
-				<li>·</li>
-				<li><a href="https://github.com/tkliuxing/bookspider">GitHub 仓库</a></li>
-				<li>·</li>
-				<li><a href="https://github.com/tkliuxing/bookspider/issues?state=open">Issues</a></li>
-			</ul>
-		</div>
-	</footer>
 	{% assets "js_all" %}
 		<script src="{{ ASSET_URL }}" rel="stylesheet"></script>
 	{% endassets %}
