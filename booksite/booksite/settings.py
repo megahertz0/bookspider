@@ -162,7 +162,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = '***********@gmail.com'
 EMAIL_HOST_PASSWORD = '******'
-EMAIL_SUBJECT_PREFIX = u'[kanxiaoshuo.me]'
+EMAIL_SUBJECT_PREFIX = u'[geqianl.com]'
 EMAIL_USE_TLS = True
 
 BROKER_URL = 'amqp://guest:guest@localhost:5672//'
