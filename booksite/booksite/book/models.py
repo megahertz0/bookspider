@@ -95,10 +95,16 @@ class Book(models.Model):
             defaults={'value': '', 'long_value': ''}
         )
         if created:
-            real_categorys = Book.objects.order_by('category').distinct('category').values_list('category', flat=True)
+            real_categorys = Book.objects.order_by('category').values('category').distinct().values_list('category', flat=True)
             CATEGORYS_KV.val = {x[1]: chr(x[0]) for x in zip(range(97, 123), real_categorys)}
             CATEGORYS_KV.save()
-        return reverse('category', args=[CATEGORYS_KV.val.get(self.category, "g")])
+        try:
+            return reverse('category', args=[CATEGORYS_KV.val.get(self.category, "g")])
+        except:
+            real_categorys = Book.objects.order_by('category').values('category').distinct().values_list('category', flat=True)
+            CATEGORYS_KV.val = {x[1]: chr(x[0]) for x in zip(range(97, 123), real_categorys)}
+            CATEGORYS_KV.save()
+            return reverse('category', args=[CATEGORYS_KV.val.get(self.category, "g")])
 
     def bookmark_update(self):
         from booksite.usercenter.models import BookMark
