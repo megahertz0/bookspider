@@ -14,4 +14,4 @@ BookSiteApp
 booksite/bookstore
 BookApp
 db.sqlite3
-
+nohup.out
