@@ -86,7 +86,7 @@ class MyUserCreationForm(UserCreationForm):
 def login_view(request, html5=False):
     if request.user.is_authenticated():
         return redirect("home")
-    redirect_to = request.REQUEST.get(REDIRECT_FIELD_NAME, '')
+    redirect_to = request.GET.get(REDIRECT_FIELD_NAME, '')
     if not redirect_to:
         referer = request.META.get("HTTP_REFERER")
         if is_safe_url(url=referer, host=request.get_host()):

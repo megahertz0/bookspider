@@ -257,7 +257,7 @@ def mb_bookpage(request, page_number=0):
 def bookrank(request):
     C = {}
     PREPAGE = 50
-    model_fields_dict = dict(map(lambda x: (x.name, x), BookRank._meta._field_name_cache))
+    model_fields_dict = dict(map(lambda x: (x.name, x), BookRank._meta.get_fields()))
     model_fields_dict.pop('book')
     sort_key = request.GET.get("s", None)
     if model_fields_dict.has_key(sort_key):
