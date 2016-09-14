@@ -75,7 +75,7 @@ django-1.10.1 python 2.7
 1. sudo pip install django_pgjson
 1. sudo pip install  django-simple-captcha
 1. sudo pip install PyQuery
-1. sudo apt-get install redis-server
+1. install new redis server 3.x http://redis.io/download
 1. sudo pip install redis_cache
 1. sudo pip install redis-simple-cache
 1. python manage.py makemigrations
