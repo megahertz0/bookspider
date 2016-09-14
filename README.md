@@ -83,3 +83,4 @@ django-1.10.1 python 2.7
 1. sudo pip install scrapy_djangoitem
 1. sudo pip install cssutils
 1. sudo pip install pyjade
+1. modify pyjade  https://github.com/syrusakbary/pyjade/pull/263/commits/9bfc036c96ff9d9908d6b6c0016a3097e11a91db

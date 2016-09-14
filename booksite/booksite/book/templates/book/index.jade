@@ -39,7 +39,7 @@
 							if user.is_superuser
 								.panel-footer.admin
 									a.btn.btn-danger.btn-xs(target="_blank",href="/admin/book/book/{{book.pk}}/") 编辑信息
-									{# a.bookfixpic.btn.btn-danger.btn-xs(href="javascript:;",data-url="{% url 'bookfixpic' book.pk %}") 更新图章 #}
+									a.bookfixpic.btn.btn-danger.btn-xs(href="javascript:;",data-url="{% url 'bookfixpic' book.pk %}") 更新图章
 				else
 					.hidden-xs.col-xs-12.col-sm-6.col-md-4
 						.panel.panel-info
@@ -133,7 +133,7 @@
 									if user.is_superuser
 										.panel-footer.admin
 											a.btn.btn-danger.btn-xs(target="_blank",href="/admin/book/book/{{book.pk}}/") 编辑信息
-											{#a.bookfixpic.btn.btn-danger.btn-xs(href="javascript:;",data-url="{% url 'bookfixpic' book.pk %}") 更新图章#}
+											a.bookfixpic.btn.btn-danger.btn-xs(href="javascript:;",data-url="{% url 'bookfixpic' book.pk %}") 更新图章
 						if pagination.has_other_pages
 							.col-md-12.col-xs-12.col-sm-12.text-center
 								.pagination
@@ -165,16 +165,5 @@
 - block footerjs
 	if user.is_authenticated
 		script
-			(function($){
-				$(".bookfixpic").die().live('click', function(event){
-					var this_a = $(event.target);
-					$.post(this_a.data('url'),{},function(data){
-						if(data.success){
-							alert("正在更新本书");
-						}else{
-							alert(data.error_message);
-						}
-					},'json');
-					return false;
-				});
+			$(function($){				$(".bookfixpic").die().live('click', function(event){					var this_a = $(event.target);					$.post(this_a.data('url'),{},function(data){						if(data.success){							alert("正在更新本书");						}else{							alert(data.error_message);						}					},'json');					return false;				});
 			})(jQuery);
