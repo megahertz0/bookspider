@@ -21,7 +21,8 @@ def categorys(request):
         defaults={'value': '', 'long_value': ''}
     )
     if created:
-        real_categorys = Book.objects.order_by('category').distinct('category').values_list('category', flat=True)
+        real_categorys = Book.objects.order_by('category').values('category').distinct().values_list('category', flat=True)
+        print real_categorys
         CATEGORYS_KV.val = {chr(x[0]): x[1] for x in zip(range(97, 123), real_categorys)}
         CATEGORYS_KV.save()
     CATEGORYS = [{'name': x[1], 'key':x[0]} for x in CATEGORYS_KV.val.items() if x[1]]
