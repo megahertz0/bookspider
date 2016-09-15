@@ -97,8 +97,8 @@ def apply_rule(request, pk=None):
     C = {}
     rule = ReplaceRule.get(pk)
     C['rule'] = rule
-    book_id = request.REQUEST.get('bi', '')
-    page_number = request.REQUEST.get('pn', '')
+    book_id = request.GET.get('bi', '')
+    page_number = request.GET.get('pn', '')
     C['book_id'] = book_id
     C['page_number'] = page_number
     this_is_save = request.method == "POST" and request.POST.get('save', None)
@@ -144,7 +144,7 @@ def apply_rule(request, pk=None):
 @permission_required('usercenter.can_add_user')
 def replace_page(request):
     C = {}
-    form = ReplacePageApplyForm(initial=request.REQUEST)
+    form = ReplacePageApplyForm(initial=request.GET)
     if request.method == "POST":
         form = ReplacePageApplyForm(request.POST)
         if form.is_valid():
@@ -166,7 +166,7 @@ def replace_page(request):
 @permission_required('usercenter.can_add_user')
 def replace_book(request):
     C = {}
-    form = ReplaceBookApplyForm(initial=request.REQUEST)
+    form = ReplaceBookApplyForm(initial=request.GET)
     if request.method == "POST":
         form = ReplaceBookApplyForm(request.POST)
         if form.is_valid():
@@ -261,9 +261,9 @@ def del_tuijian(request, model='ft', book_id=0):
 def book_search(request):
     C = {}
     C['cq'] = 'all'
-    query_text = request.REQUEST.get('q')
-    category_query = request.REQUEST.get('cq')
-    ordered_field = request.REQUEST.get('od', 'default')
+    query_text = request.GET.get('q')
+    category_query = request.GET.get('cq')
+    ordered_field = request.GET.get('od', 'default')
     order_select = [
         {'val': 'default', 'name': "默认排序"},
         {'val': 'title', 'name': "按名称"},
@@ -292,7 +292,7 @@ def book_search(request):
     # books 分页
     p = Paginator(books, 15)
     try:
-        page = p.page(int(request.REQUEST.get('p', 1)))
+        page = p.page(int(request.GET.get('p', 1)))
     except:
         page = p.page(1)
     C['books'] = page.object_list
@@ -319,13 +319,13 @@ def book_jiuzhenggengxin(request):
                                                   ).annotate(last_page=Max('page_number')
                                                   ).values('last_page'))
     # 是否分页
-    if request.REQUEST.get('showall', 0) == '1':
+    if request.GET.get('showall', 0) == '1':
         page = None
     else:
         # books 分页
         p = Paginator(books, 15)
         try:
-            page = p.page(int(request.REQUEST.get('p', 1)))
+            page = p.page(int(request.GET.get('p', 1)))
         except:
             page = p.page(1)
         page_books = page.object_list
@@ -382,14 +382,14 @@ def book_page_next_zipper(request):
         bookpages = []
         C['success'] = True
     # 是否分页
-    if request.REQUEST.get('showall', 0) == '1':
+    if request.GET.get('showall', 0) == '1':
         bookpages = None
         page = None
     else:
         # books 分页
         p = Paginator(bookpages, 15)
         try:
-            page = p.page(int(request.REQUEST.get('p', 1)))
+            page = p.page(int(request.GET.get('p', 1)))
         except:
             page = p.page(1)
         bookpages = page.object_list
@@ -403,7 +403,7 @@ def book_page_next_zipper(request):
 @params_required('book_id')
 @permission_required('usercenter.can_add_user')
 def book_jx(request):
-    bookid = request.REQUEST['book_id']
+    bookid = request.GET['book_id']
     book = get_object_or_404(Book, id=bookid)
     book.last_page = book.get_last_page()
     book.save()
@@ -415,7 +415,7 @@ def book_jx(request):
 @params_required('book_id')
 @permission_required('usercenter.can_add_user')
 def book_ft(request):
-    bookid = request.REQUEST['book_id']
+    bookid = request.GET['book_id']
     book = get_object_or_404(Book, id=bookid)
     ft = FengTui()
     ft.add(book)
@@ -428,7 +428,7 @@ def book_ft(request):
 @params_required('book_id')
 @permission_required('usercenter.can_add_user')
 def book_jt(request):
-    bookid = request.REQUEST['book_id']
+    bookid = request.GET['book_id']
     book = get_object_or_404(Book, id=bookid)
     jt = JingTui()
     jt.add(book)
@@ -444,7 +444,7 @@ def get_new_book(request):
         # books 分页
         p = Paginator(new_book_log, 15)
         try:
-            page = p.page(int(request.REQUEST.get('p', 1)))
+            page = p.page(int(request.GET.get('p', 1)))
         except:
             page = p.page(1)
         object_list = page.object_list
@@ -453,7 +453,7 @@ def get_new_book(request):
         return render(request, 'background/get_new_book.jade', C)
     if request.method != 'POST':
         return HttpResponseBadRequest()
-    book_title = request.REQUEST.get('book_title')
+    book_title = request.GET.get('book_title')
     if not book_title:
         return render(request, 'background/get_new_book.jade', {'no_title': True})
     try:

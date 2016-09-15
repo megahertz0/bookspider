@@ -76,14 +76,14 @@ block pagetitle
 - block footerjs
 	if create_rule_form.errors or edit_rule
 		script
-			$(function(){
-				$("#myModal").modal('show');
-			});
+			|$(function(){
+			|	$("#myModal").modal('show');
+			|});
 	script
-		$(function(){
-			$(".apply_rule").click(function(event){
-				var this_btn = $(event.currentTarget);
-				$("#replaceModal").attr("action",this_btn.data("url"));
-				$("#replaceModal").modal('show');
-			});
-		});
+		|$(function(){
+		|	$(".apply_rule").click(function(event){
+		|		var this_btn = $(event.currentTarget);
+		|		$("#replaceModal").attr("action",this_btn.data("url"));
+		|		$("#replaceModal").modal('show');
+		|	});
+		|});

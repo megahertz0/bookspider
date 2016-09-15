@@ -20,38 +20,38 @@ block pagetitle
 - block footerjs
 	script(src="//code.highcharts.com/4.0.4/highcharts.js")
 	script(type="text/javascript")
-		$(function () {
-			$('#maincontainer').highcharts({
-				chart: {
-					type: 'pie',
-					options3d: {
-						enabled: true,
-						alpha: 45,
-						beta: 0
-					}
-				},
-				title: {
-					text: '书籍分类统计, 共{{book_count|floatformat}}本'
-				},
-				tooltip: {
-					pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
-					headerFormat: '<span>{point.key}: {point.y}本</span><br/>'
-				},
-				plotOptions: {
-					pie: {
-						allowPointSelect: true,
-						cursor: 'pointer',
-						depth: 35,
-						dataLabels: {
-							enabled: true,
-							format: '{point.name}: {point.y}本'
-						}
-					}
-				},
-				series: [{
-					type: 'pie',
-					name: 'Browser share',
-					data: {{category_data|safe}}
-				}]
-			});
-		});
+		|$(function () {
+		|	$('#maincontainer').highcharts({
+		|		chart: {
+		|			type: 'pie',
+		|			options3d: {
+		|				enabled: true,
+		|				alpha: 45,
+		|				beta: 0
+		|			}
+		|		},
+		|		title: {
+		|			text: '书籍分类统计, 共{{book_count|floatformat}}本'
+		|		},
+		|		tooltip: {
+		|			pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
+		|			headerFormat: '<span>{point.key}: {point.y}本</span><br/>'
+		|		},
+		|		plotOptions: {
+		|			pie: {
+		|				allowPointSelect: true,
+		|				cursor: 'pointer',
+		|				depth: 35,
+		|				dataLabels: {
+		|					enabled: true,
+		|					format: '{point.name}: {point.y}本'
+		|				}
+		|			}
+		|		},
+		|		series: [{
+		|			type: 'pie',
+		|			name: 'Browser share',
+		|			data: {{category_data|safe}}
+		|		}]
+		|	});
+		|});

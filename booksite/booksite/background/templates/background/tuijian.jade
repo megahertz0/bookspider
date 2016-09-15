@@ -77,14 +77,14 @@ block pagetitle
 - block footerjs
 	if create_ft_form.errors or edit_rule
 		script
-			$(function(){
-				$("#ftModal").modal('show');
-			});
+			|$(function(){
+			|	$("#ftModal").modal('show');
+			|});
 	if create_jt_form.errors or edit_rule
 		script
-			$(function(){
-				$("#jtModal").modal('show');
-			});
+			|$(function(){
+			|	$("#jtModal").modal('show');
+			|});
 	//- script
 	//- 	$(function(){
 	//- 		$(".apply_rule").click(function(event){

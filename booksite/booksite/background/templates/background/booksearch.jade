@@ -93,58 +93,58 @@ block pagetitle
 								li.disabled: a(href="javascript:;") 共（{{pagination.paginator.num_pages}}）页，{{pagination.paginator.count}}条数据
 block footerjs
 	script
-		$(function () {
-			$('[data-toggle="tooltip"]').tooltip();
-			$('[data-toggle="popover"]').popover();
-			$('.bookjx').click(function(){
-				var bookid = $(this).data('bookid');
-				var last_page = $(this).parents('tr').find("span.last").eq(0);
-				var new_page = $(this).parents('tr').find("span.new").eq(0);
-				$.ajax({
-					url: "{% url 'bbg:book_jx' %}",
-					method: "POST",
-					dataType: 'json',
-					data: {book_id:bookid},
-					success: function(data){
-						new_page.text(last_page.text());
-						alert("纠正新章节成功！");
-					},
-					error: function(xhr,status,error){
-						alert("请求失败！Status: "+status+" Content: "+xhr.responseText);
-					}
-				});
-				return false;
-			});
-			$('.bookft').click(function(){
-				var bookid = $(this).data('bookid');
-				$.ajax({
-					url: "{% url 'bbg:book_ft' %}",
-					method: "POST",
-					dataType: 'json',
-					data: {book_id:bookid},
-					success: function(data){
-						alert("封推成功！");
-					},
-					error: function(xhr,status,error){
-						alert("请求失败！Status: "+status+" Content: "+xhr.responseText);
-					}
-				});
-				return false;
-			});
-			$('.bookjt').click(function(){
-				var bookid = $(this).data('bookid');
-				$.ajax({
-					url: "{% url 'bbg:book_jt' %}",
-					method: "POST",
-					dataType: 'json',
-					data: {book_id:bookid},
-					success: function(data){
-						alert("精推成功！");
-					},
-					error: function(xhr,status,error){
-						alert("请求失败！Status: "+status+" Content: "+xhr.responseText);
-					}
-				});
-				return false;
-			});
-		})
+		|jQuery( document ).ready(function ($) {
+		|	$('[data-toggle="tooltip"]').tooltip();
+		|	$('[data-toggle="popover"]').popover();
+		|	$('.bookjx').click(function(){
+		|		var bookid = $(this).data('bookid');
+		|		var last_page = $(this).parents('tr').find("span.last").eq(0);
+		|		var new_page = $(this).parents('tr').find("span.new").eq(0);
+		|		$.ajax({
+		|			url: "{% url 'bbg:book_jx' %}",
+		|			method: "POST",
+		|			dataType: 'json',
+		|			data: {book_id:bookid},
+		|			success: function(data){
+		|				new_page.text(last_page.text());
+		|				alert("纠正新章节成功！");
+		|			},
+		|			error: function(xhr,status,error){
+		|				alert("请求失败！Status: "+status+" Content: "+xhr.responseText);
+		|			}
+		|		});
+		|		return false;
+		|	});
+		|	$('.bookft').click(function(){
+		|		var bookid = $(this).data('bookid');
+		|		$.ajax({
+		|			url: "{% url 'bbg:book_ft' %}",
+		|			method: "POST",
+		|			dataType: 'json',
+		|			data: {book_id:bookid},
+		|			success: function(data){
+		|				alert("封推成功！");
+		|			},
+		|			error: function(xhr,status,error){
+		|				alert("请求失败！Status: "+status+" Content: "+xhr.responseText);
+		|			}
+		|		});
+		|		return false;
+		|	});
+		|	$('.bookjt').click(function(){
+		|		var bookid = $(this).data('bookid');
+		|		$.ajax({
+		|			url: "{% url 'bbg:book_jt' %}",
+		|			method: "POST",
+		|			dataType: 'json',
+		|			data: {book_id:bookid},
+		|			success: function(data){
+		|				alert("精推成功！");
+		|			},
+		|			error: function(xhr,status,error){
+		|				alert("请求失败！Status: "+status+" Content: "+xhr.responseText);
+		|			}
+		|		});
+		|		return false;
+		|	});
+		|});
