@@ -40,7 +40,7 @@ class BookinfoPipeline(object):
                 RC.hset('bookimgs', str(item['book_number']), 'True')
                 RC.hset('books', str(item['book_number']), 'True')
                 raise DropItem("Duplicate item found: %s" % item['book_number'])
-            print str(item['book_number']).ljust(10), "-" * 10, item['title']
+##            print str(item['book_number']).ljust(10), "-" * 10, item['title']
             if len(item['images']) == 1:
                 old_path = os.path.join(settings.get("IMAGES_STORE"), item['images'][0]['path'])
                 if not os.path.exists(old_path):
