@@ -11,6 +11,9 @@ import os
 import sys
 import booksite
 from django.core.wsgi import get_wsgi_application
+
+LOG_ENABLED = False
+
 # reload(sys)
 # sys.setdefaultencoding('utf-8')
 sys.path.append(os.path.dirname(booksite.__file__))
