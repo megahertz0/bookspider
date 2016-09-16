@@ -118,7 +118,7 @@ def category(request, category):
         defaults={'value': '', 'long_value': ''}
     )
     if created:
-        real_categorys = Book.objects.order_by('category').distinct('category').values_list('category', flat=True)
+        real_categorys = Book.objects.order_by('category').values('category').distinct().values_list('category', flat=True)
         CATEGORYS_KV.val = {chr(x[0]): x[1] for x in zip(range(97, 123), real_categorys)}
         CATEGORYS_KV.save()
     if category not in CATEGORYS_KV.val:

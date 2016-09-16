@@ -33,10 +33,10 @@
 		//- 	strong 书籍目录加载中, 请耐心等待......
 - block footerjs
 	script
-		$(function(){
-			$("#Pages").load('{% url "bookindexajax" book.pk %}', function(resp,status,xhr){
-				if ( status == "error" ) {
-					$("#Alert").show();
-				}
-			})
-		});
+		|$(function(){
+		|	$("#Pages").load('{% url "bookindexajax" book.pk %}', function(resp,status,xhr){
+		|		if ( status == "error" ) {
+		|			$("#Alert").show();
+		|		}
+		|	})
+		|});

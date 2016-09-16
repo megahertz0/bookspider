@@ -70,9 +70,11 @@ class BookpagePipeline(object):
             try:
                 item.save()
             except:
-                import traceback
-                traceback.print_exc()
-                # RC.set(item['origin_url'], 'True')
+##                import traceback
+##                traceback.print_exc()
+                print item['origin_url']
+                print item['page_number']
+                RC.set(item['origin_url'], 'True')
                 raise DropItem("Item save error: %s" % item['page_number'])
             try:
                 item.instance.save_content_zip_file(item['content'])

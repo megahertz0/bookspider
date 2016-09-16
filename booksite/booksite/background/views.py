@@ -28,8 +28,8 @@ def index(request):
         defaults={'value': '', 'long_value': ''}
     )
     if created:
-        real_categorys = Book.objects.order_by('category').distinct(
-            'category').values_list('category', flat=True)
+        real_categorys = Book.objects.order_by('category').values(
+            'category').distinct().values_list('category', flat=True)
         CATEGORYS_KV.val = {chr(x[0]): x[1]
                             for x in zip(range(97, 123), real_categorys)}
         CATEGORYS_KV.save()
@@ -311,8 +311,8 @@ def book_jiuzhenggengxin(request):
     books = Book.objects.filter(
         is_deleted=False,
         book_number__in=BookPage.objects.order_by(
-                                       ).distinct('book_number'
-                                       ).values_list('book_number', flat=True)
+                                       ).values('book_number'
+                                       ).distinct().values_list('book_number', flat=True)
     ).exclude(last_page_number=0
     ).exclude(last_page_number__in=BookPage.objects.order_by(
                                                   ).values('book_number'
