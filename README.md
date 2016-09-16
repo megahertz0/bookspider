@@ -84,3 +84,10 @@ django-1.10.1 python 2.7
 1. sudo pip install cssutils
 1. sudo pip install pyjade
 1. modify pyjade  https://github.com/syrusakbary/pyjade/pull/263/commits/9bfc036c96ff9d9908d6b6c0016a3097e11a91db
+1. install scrapyd & deploy
+	1. pip install scrapyd
+	2. pip install scrapy-client
+	3. cd bookspider
+	4. scrapyd-deploy
+	5. run spider in scrapyd with http and curl
+	6. 
