@@ -17,6 +17,7 @@ BOOK_INFO_URL_RE = re.compile(r"http:\/\/www\.86696\.cc\/book/(?P<book_id>\d+)\.
 BOOK_INDEX_URL_RE = re.compile(r"http:\/\/www\.86696\.cc\/html\/\d+\/(?P<book_id>\d+)\/$")
 BOOK_PAGE_URL_RE = re.compile(r"http:\/\/www\.86696\.cc\/html\/\d+\/(?P<book_id>\d+)\/(?P<page_id>\d+)\.html")
 PASS_URL = ['login.php', 'newmessage.php', 'charset=', 'index.php']
+PASS_URL_RE = re.compile(r"http:\/\/www\.86696\.cc\/booktop[^/]+/(?P<page_id>\d+)\.html")
 RC = redis.Redis()
 
 
@@ -54,6 +55,11 @@ class DouluoSpider(Spider):
     def is_pass_url(self, url):
         for i in PASS_URL:
             if i in url:
+                return True
+        matchinfo = PASS_URL_RE.match(url)
+        if (matchinfo):
+            pageid = matchinfo.groupdict()['page_id']
+            if pageid > 3:
                 return True
         return False
 

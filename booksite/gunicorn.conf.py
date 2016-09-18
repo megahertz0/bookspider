@@ -7,7 +7,7 @@ worker_class = "gevent"
 worker_connections = 3000
 keepalive = 1
 pidfile = '/tmp/book.gunicorn.pid'
-#errorlog = '/tmp/gunicorn.error.log'
+errorlog = '/tmp/gunicorn.error.log'
 
 try:
     from local_gunicorn import *
