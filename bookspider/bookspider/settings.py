@@ -46,13 +46,21 @@ DOWNLOADER_MIDDLEWARES = {
 #    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110,
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
 #    'bookspider.middlewares.ProxyMiddleware': 100,
-    'bookspider.middlewares.RotateUserAgentMiddleware': 400
+    'bookspider.middlewares.RotateUserAgentMiddleware': 400,
+    'scrapy.contrib.downloadermiddleware.downloadtimeout.DownloadTimeoutMiddleware':350,
+    'scrapy.contrib.downloadermiddleware.retry.RetryMiddleware': 500,
 }
 
 PROXY_LIST = [
 #    "111.13.55.3:22",
 
 ]
+
+DNSCACHE_ENABLED = True
+DEPTH_LIMIT = 6
+DEPTH_PRIORITY = 1
+DOWNLOAD_TIMEOUT=30
+
 
 try:
     from .local_settings import *
