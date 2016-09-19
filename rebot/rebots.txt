@@ -12,4 +12,5 @@ Disallow: /template/
 Disallow: /bbg/
 Disallow: /media/
 Crawl-delay: 6000
-Sitemap:
+Sitemap: http://www.fastpao.com/sitemap.xml
+
