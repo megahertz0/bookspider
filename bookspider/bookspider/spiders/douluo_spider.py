@@ -17,7 +17,7 @@ BOOK_INFO_URL_RE = re.compile(r"http:\/\/www\.86696\.cc\/book/(?P<book_id>\d+)\.
 BOOK_INDEX_URL_RE = re.compile(r"http:\/\/www\.86696\.cc\/html\/\d+\/(?P<book_id>\d+)\/$")
 BOOK_PAGE_URL_RE = re.compile(r"http:\/\/www\.86696\.cc\/html\/\d+\/(?P<book_id>\d+)\/(?P<page_id>\d+)\.html")
 PASS_URL = ['login.php', 'newmessage.php', 'charset=', 'index.php']
-PASS_URL_RE = re.compile(r"http:\/\/www\.86696\.cc\/booktop[^/]+/(?P<page_id>\d+)\.html")
+PASS_URL_RE = re.compile(r"http:\/\/www\.86696\.cc\/booktop[^/]+/\d+/(?P<page_id>\d+)\.html")
 RC = redis.Redis()
 
 
