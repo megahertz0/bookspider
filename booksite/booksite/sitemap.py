@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-#from booksite.baidusitemap import BaiduSitemap
+from booksite.baidusitemap.models import BaiduSitemap
 from booksite.book.models import Book
 
-class BookSitemaps():
-    changefreq = 'daily'
+class BookSitemaps(BaiduSitemap):
+    changefreq = 'hourly'
     priority = 0.5
 
     def items(self):

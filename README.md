@@ -80,6 +80,7 @@ django-1.10.1 python 2.7.12
 1. sudo pip install redis-simple-cache
 1. python manage.py makemigrations
 1. python manage.py migrate
+1. python manage.py collectstatic
 1. sudo pip install scrapy_djangoitem
 1. sudo pip install cssutils
 1. sudo pip install pyjade

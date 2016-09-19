@@ -36,7 +36,7 @@ INSTALLED_APPS = (
     'booksite.book',
     'booksite.usercenter',
     'booksite.background',
-#    'booksite.baidusitemap',
+    'booksite.baidusitemap',
 )
 
 MIDDLEWARE_CLASSES = (
