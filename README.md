@@ -56,7 +56,7 @@
 1. 使用Scrapy进行抓取, `scrapy crawl "爬虫名称"`
 
 ### ubuntu ###
-django-1.10.1 python 2.7
+django-1.10.1 python 2.7.12
 
 1. sudo apt-get install python-pip
 1. sudo apt-get install python-dev python3-dev libxml2-dev libxslt1-dev zlib1g-dev
@@ -90,4 +90,9 @@ django-1.10.1 python 2.7
 	3. cd bookspider
 	4. scrapyd-deploy
 	5. run spider in scrapyd with http and curl
-	6. 
+1. gunicorn+gevet
+	1. pip install gunicorn
+	1. pip install greenlet
+	1. pip install eventlet
+	1. pip install gevent
+	1. pip install supervisor
