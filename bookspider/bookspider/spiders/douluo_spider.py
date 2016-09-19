@@ -59,6 +59,7 @@ class DouluoSpider(Spider):
         matchinfo = PASS_URL_RE.match(url)
         if (matchinfo):
             pageid = matchinfo.groupdict()['page_id']
+##            print 'is_pass_url=' + pageid
             if pageid > 3:
                 return True
         return False
