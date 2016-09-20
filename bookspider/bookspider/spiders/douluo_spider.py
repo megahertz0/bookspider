@@ -24,6 +24,7 @@ RC = redis.Redis()
 class DouluoSpider(Spider):
     name = "douluo"
     allowed_domains = ["www.86696.cc"]
+    request_urls = {}
 
     def __init__(self, starturl=None, frombookid=None, frombookidrange=None, fromexistbooks=False, onlybookinfo=False,
                  *args, **kwargs):
@@ -64,8 +65,16 @@ class DouluoSpider(Spider):
                 return True
         return False
 
+    def is_new_url(self, url):
+        if self.request_urls.has_key(url):
+            return False
+        self.request_urls[url] = 1
+        return True
+        
+
     def parse(self, response):
         url = response.url
+        print 'parse: ' + url
         sel = Selector(response)
         jQ = PQ(response.body_as_unicode())
         # 书页
@@ -78,7 +87,8 @@ class DouluoSpider(Spider):
                 hrefs = sel.css(".button2.white").xpath('a[1]/@href').extract()
                 for href in hrefs:
                     rel_url = urlparse.urljoin(url, href)
-                    yield Request(rel_url, callback=self.parse)
+                    if self.is_new_url(rel_url):
+                        yield Request(rel_url, callback=self.parse)
             else:
                 # 否则生成书籍信息
                 book['origin_url'] = url
@@ -91,7 +101,8 @@ class DouluoSpider(Spider):
                 hrefs = sel.css(".button2.white").xpath('a[1]/@href').extract()
                 for href in hrefs:
                     rel_url = urlparse.urljoin(url, href)
-                    yield Request(rel_url, callback=self.parse)
+                    if self.is_new_url(rel_url):
+                        yield Request(rel_url, callback=self.parse)
         # 书目
         elif BOOK_INDEX_URL_RE.match(url) and not self.onlybookinfo:
             hrefs = sel.xpath("//dl/dd/a/@href").extract()
@@ -100,7 +111,8 @@ class DouluoSpider(Spider):
                 # 去重
                 if RC.get(rel_url):
                     continue
-                yield Request(rel_url, callback=self.parse)
+                if self.is_new_url(rel_url):
+                    yield Request(rel_url, callback=self.parse)
         # 章节
         elif BOOK_PAGE_URL_RE.match(url) and not self.onlybookinfo:
             page = BookpageItem()
@@ -112,9 +124,11 @@ class DouluoSpider(Spider):
                 next_rel_href = urlparse.urljoin(url, next_href)
                 prev_rel_href = urlparse.urljoin(url, prev_href)
                 if not RC.get(next_rel_href):
-                    yield Request(next_rel_href, callback=self.parse)
+                    if self.is_new_url(next_rel_href):
+                        yield Request(next_rel_href, callback=self.parse)
                 if not RC.get(prev_rel_href):
-                    yield Request(prev_rel_href, callback=self.parse)
+                    if self.is_new_url(prev_rel_href):
+                        yield Request(prev_rel_href, callback=self.parse)
             else:
                 page['title'] = sel.xpath('//h1/text()').extract()[0]
                 page['content'] = jQ('#BookText').text().replace(" ", "\n")
@@ -145,7 +159,8 @@ class DouluoSpider(Spider):
                         book_number = BOOK_INFO_URL_RE.match(href).groupdict()['book_id']
                         if RC.hget('books', str(book_number)):
                             continue
-                    yield Request(href, callback=self.parse)
+                    if self.is_new_url(href):
+                        yield Request(href, callback=self.parse)
 
     def get_npage_url(self, response, page_a=2):
         sel = Selector(response)
