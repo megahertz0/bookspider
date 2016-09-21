@@ -60,7 +60,7 @@ DNSCACHE_ENABLED = True
 DEPTH_LIMIT = 6
 DEPTH_PRIORITY = 1
 DOWNLOAD_TIMEOUT=30
-
+DOWNLOAD_MAXSIZE = 3 * 1024 * 1024
 
 try:
     from .local_settings import *

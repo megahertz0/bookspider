@@ -12,6 +12,35 @@ from scrapy.http import Request
 
 from bookspider.items import BookinfoItem, BookpageItem
 
+import signal
+import time
+import psutil
+import os
+
+class TimeOutException(Exception):  
+    pass 
+
+def setTimeout(num, callback):  
+    def wrape(func):  
+        def handle(signum, frame):  
+            raise TimeOutException("运行超时！")  
+        def toDo(*args, **kwargs):  
+            try:  
+                signal.signal(signal.SIGALRM, handle)  
+                signal.alarm(num)#开启闹钟信号  
+                rs = func(*args, **kwargs)  
+                signal.alarm(0)#关闭闹钟信号  
+                return rs  
+            except TimeOutException, e:  
+                callback()
+              
+        return toDo  
+    return wrape
+
+def onTimeout():
+    print 'onTimeout kill current process'
+    psutil.Process(os.getpid()).kill()
+
 BASE_URL = "http://www.86696.cc"
 BOOK_INFO_URL_RE = re.compile(r"http:\/\/www\.86696\.cc\/book/(?P<book_id>\d+)\.html")
 BOOK_INDEX_URL_RE = re.compile(r"http:\/\/www\.86696\.cc\/html\/\d+\/(?P<book_id>\d+)\/$")
@@ -19,6 +48,8 @@ BOOK_PAGE_URL_RE = re.compile(r"http:\/\/www\.86696\.cc\/html\/\d+\/(?P<book_id>
 PASS_URL = ['login.php', 'newmessage.php', 'charset=', 'index.php']
 PASS_URL_RE = re.compile(r"http:\/\/www\.86696\.cc\/booktop[^/]+/\d+/(?P<page_id>\d+)\.html")
 RC = redis.Redis()
+
+
 
 
 class DouluoSpider(Spider):
@@ -66,12 +97,15 @@ class DouluoSpider(Spider):
         return False
 
     def is_new_url(self, url):
+        if (url == 'http://www.86696.cc/html/5/5877/1828803.html'):  # 卡死的url
+            return False
         if self.request_urls.has_key(url):
             return False
         self.request_urls[url] = 1
         return True
         
 
+    @setTimeout(3, onTimeout)
     def parse(self, response):
         url = response.url
         print 'parse: ' + url
