@@ -16,6 +16,8 @@ import signal
 import time
 import psutil
 import os
+from multiprocessing import Process
+
 
 class TimeOutException(Exception):  
     pass 
@@ -50,7 +52,13 @@ PASS_URL_RE = re.compile(r"http:\/\/www\.86696\.cc\/booktop[^/]+/\d+/(?P<page_id
 RC = redis.Redis()
 
 
-
+def ProcessTimeout():
+    print "ProcessTimeout run."
+    time.sleep(60 * 60 * 1)  # seconds
+    parent = psutil.Process(os.getppid())
+    print parent.cmdline()
+    if (parent.cmdline()[0].endswith('python') > 0):
+        parent.kill()
 
 class DouluoSpider(Spider):
     name = "douluo"
@@ -64,6 +72,8 @@ class DouluoSpider(Spider):
         self.start_urls = [
             "http://www.86696.cc/booktoppostdate/0/1.html",
             "http://www.86696.cc/booktoplastupdate/0/1.html",
+            "http://www.86696.cc/booktopweekvisit/0/1.html",
+            "http://www.86696.cc/modules/article/toplist.php?sort=monthvisit",
         ]
         if starturl:
             self.start_urls = starturl.split(" ")
@@ -83,6 +93,8 @@ class DouluoSpider(Spider):
         print "-" * 20
         print "Start from:\n", '\n'.join(self.start_urls)
         print "-" * 20, "\n"
+        t = Process(target=ProcessTimeout)
+        t.start()
 
     def is_pass_url(self, url):
         for i in PASS_URL:

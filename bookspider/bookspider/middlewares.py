@@ -15,7 +15,8 @@ class ProxyMiddleware(object):
     def process_request(self, request, spider):
         # Set the location of the proxy
 ##        print self.proxy_list
-        proxy = random.choice(self.proxy_list)
+        proxy = "http://" + random.choice(self.proxy_list)
+        print 'use proxy:', proxy
         if not isinstance(proxy, basestring):
             raise AssertionError("settings.PROXY must be string.")
         request.meta['proxy'] = proxy
