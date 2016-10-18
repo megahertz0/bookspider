@@ -42,6 +42,7 @@ def setTimeout(num, callback):
 def onTimeout():
     print 'onTimeout kill current process'
     psutil.Process(os.getpid()).kill()
+    os.kill(os.getpid(), 9)
 
 BASE_URL = "http://www.86696.cc"
 BOOK_INFO_URL_RE = re.compile(r"http:\/\/www\.86696\.cc\/book/(?P<book_id>\d+)\.html")
@@ -59,6 +60,8 @@ def ProcessTimeout():
     print parent.cmdline()
     if (parent.cmdline()[0].endswith('python') > 0):
         parent.kill()
+        os.kill(os.getppid(), 9)
+        os.system("kill -9 " + os.getppid())
 
 class DouluoSpider(Spider):
     name = "douluo"
