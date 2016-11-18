@@ -17,7 +17,7 @@ import time
 import psutil
 import os
 from multiprocessing import Process
-
+import threading
 
 class TimeOutException(Exception):  
     pass 
@@ -63,6 +63,13 @@ def ProcessTimeout():
         os.kill(os.getppid(), 9)
         os.system("kill -9 " + os.getppid())
 
+def ThreadTimeout():
+    print "ThreadTimeout run."
+    time.sleep(60 * 36)  # seconds
+    print 'ThreadTimeout onTimeout kill current process'
+    psutil.Process(os.getpid()).kill()
+    os.kill(os.getpid(), 9)
+
 class DouluoSpider(Spider):
     name = "douluo"
     allowed_domains = ["www.86696.cc"]
@@ -70,6 +77,10 @@ class DouluoSpider(Spider):
 
     def __init__(self, starturl=None, frombookid=None, frombookidrange=None, fromexistbooks=False, onlybookinfo=False,
                  *args, **kwargs):
+        t = Process(target=ProcessTimeout)
+        t.start()
+        t1 = threading.Thread(target=ThreadTimeout)
+        t1.start()
         super(DouluoSpider, self).__init__(*args, **kwargs)
         self.onlybookinfo = bool(onlybookinfo)
         self.start_urls = [
@@ -96,8 +107,6 @@ class DouluoSpider(Spider):
         print "-" * 20
         print "Start from:\n", '\n'.join(self.start_urls)
         print "-" * 20, "\n"
-        t = Process(target=ProcessTimeout)
-        t.start()
 
     def is_pass_url(self, url):
         for i in PASS_URL:

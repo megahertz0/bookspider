@@ -19,6 +19,7 @@ from .models import Book, BookPage, BookRank, KeyValueStorage
 from .tasks import update_page, update_book_pic_page
 
 
+@cache_page(60 * 60 * 3)
 def home(request):
     C = {}
     books = Book.objects.filter(is_deleted=False).order_by('book_number')
@@ -45,6 +46,7 @@ def home(request):
         C['jt_books'] = jt_books
     C['books'] = page.object_list
     C['pagination'] = page
+    C['ad'] = (request.GET.get('ss', '') == 'ad')
     return render(request, 'book/index.jade', C)
 
 
@@ -137,7 +139,7 @@ def category(request, category):
     return render(request, 'book/index.jade', C)
 
 
-@cache_page(60 * 60)
+@cache_page(60 * 60 * 3)
 def bookinfo(request, book_id=0):
     if book_id == 0:
         raise Http404
@@ -152,7 +154,7 @@ def bookinfo(request, book_id=0):
     return render(request, 'book/bookinfo.jade', C)
 
 
-# @cache_page(60 * 60)
+@cache_page(60 * 5)
 def bookindex(request, book_id=0):
     if book_id == 0:
         raise Http404
@@ -175,7 +177,7 @@ def mb_bookindex(request, book_id=0):
     return render(request, 'bookhtml5/bookindex.html', C)
 
 
-@cache_page(60 * 60)
+@cache_page(60 * 60 * 3)
 def bookindexajax(request, book_id=0):
     if book_id == 0:
         raise Http404
@@ -254,6 +256,7 @@ def mb_bookpage(request, page_number=0):
     return render(request, 'bookhtml5/bookpage.html', C)
 
 
+@cache_page(60 * 60 * 3)
 def bookrank(request):
     C = {}
     PREPAGE = 50
@@ -275,7 +278,7 @@ def bookrank(request):
     return render(request, 'book/bookrank.jade', C)
 
 
-@cache_page(60 * 60)
+@cache_page(60 * 60 * 3)
 def booknews(request):
     """最近更新列表"""
     C = {}
