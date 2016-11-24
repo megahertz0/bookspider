@@ -13,8 +13,9 @@
 	<meta name="apple-mobile-web-app-title" content="看小说么">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<link href="http://cdn.bootcss.com/flat-ui/2.1.3/css/flat-ui.min.css" rel="stylesheet">
+	<link href="http://cdn.ty629.com/b/app.css" rel="stylesheet">
 	{% assets "css_all" %}
-		<link href="{{ ASSET_URL }}" rel="stylesheet">
+		{# <link href="{{ ASSET_URL }}" rel="stylesheet"> #}
 	{% endassets %}
 	{% if BAIDUTONGJI_ID %}
 		{% include "baidutongji.html" %}
@@ -136,8 +137,9 @@
 	</div>
 	{% block footerblock %}{% endblock footerblock %}
 	<script src="http://cdn.bootcss.com/spin.js/2.3.0/spin.min.js" rel="stylesheet"></script>
+	<script src="http://cdn.ty629.com/b/app.js" rel="stylesheet"></script>
 	{% assets "js_all" %}
-		<script src="{{ ASSET_URL }}" rel="stylesheet"></script>
+		{# <script src="{{ ASSET_URL }}" rel="stylesheet"></script> #}
 	{% endassets %}
 	{% block footerjs %}
 	{% endblock footerjs %}
