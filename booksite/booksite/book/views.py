@@ -46,7 +46,6 @@ def home(request):
         C['jt_books'] = jt_books
     C['books'] = page.object_list
     C['pagination'] = page
-    C['ad'] = (request.GET.get('ss', '') == 'ad')
     return render(request, 'book/index.jade', C)
 
 
