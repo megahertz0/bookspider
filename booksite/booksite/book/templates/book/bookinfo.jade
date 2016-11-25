@@ -24,7 +24,7 @@ block content
 					h3.panel-title 书籍简介
 				.panel-body
 					.frontimage.pull-left
-						img(src="{%if book.front_image%}{{book.front_image.url}}{%else%}{%static 'img/nocover.jpg'%}{%endif%}")
+						img(src="{%if book.front_image%}{{book.front_image.url}}{%else%}{%static 'http://bdcdn.npx98.com/static/img/nocover.jpg'%}{%endif%}")
 						a.btn.btn-sm.btn-info(href="{{book.get_index_url}}") 进入阅读
 					ol.breadcrumb.center(style="margin: 0 0 5px 125px;")
 						- with book.get_bookrank as bookrank
@@ -55,7 +55,7 @@ block content
 						for book in tuijian
 							.media.tuijian
 								a.pull-left(href="#")
-									img.media-object(width="65",height="80",src="{%if book.front_image%}{{book.front_image.url}}{%else%}{%static 'img/nocover.jpg'%}{%endif%}")
+									img.media-object(width="65",height="80",src="{%if book.front_image%}{{book.front_image.url}}{%else%}{%static 'http://bdcdn.npx98.com/static/img/nocover.jpg'%}{%endif%}")
 								.media-body
 									h6.media-heading: a(href="{{book.get_absolute_url}}")= book.title
 									p

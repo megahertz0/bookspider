@@ -30,7 +30,7 @@
 												| {{book.author|truncatechars:'7'}}
 							.bookinfo.panel-body
 								.frontimage
-									img.pull-left(src="{%if book.front_image%}{{book.front_image.url}}{%else%}{%static 'img/nocover.jpg'%}{%endif%}")
+									img.pull-left(src="{%if book.front_image%}{{book.front_image.url}}{%else%}{%static 'http://bdcdn.npx98.com/static/img/nocover.jpg'%}{%endif%}")
 								.caption
 									- with book.get_bookrank as bookrank
 										p
