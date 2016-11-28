@@ -6270,7 +6270,9 @@ $(function() {
     var load_zip = function(elements) {
         elements.each(function(index) {
             var this_ele = $(this);
-            $.get(this_ele.data('pageurl'), function(data) {
+            var url = this_ele.data('pageurl');
+            url = url.replace("http://bdcdn.npx98.com", "");
+            $.get(url, function(data) {
                 console.log(this_ele);
                 $(data).appendTo(this_ele);
                 this_ele.removeClass('noload');
